@@ -46,6 +46,25 @@ export default function Usuarios() {
                 alert('Error al cargar programas');
             }
         };
+        try {
+            const response = await axios.get(`${API_URL}/all`);
+            setUsuarios(Array.isArray(response.data) ? response.data : []);
+        } catch (error) {
+            console.error('Error al cargar usuarios:', error);
+            alert('Error al cargar usuarios');
+        }
+    };
+
+    const cargarProgramas = async () => {
+        try {
+            const response = await axios.get(PROGRAMAS_URL);
+            console.log("Programas cargados:", response.data);
+            setProgramas(Array.isArray(response.data) ? response.data : []);
+        } catch (error) {
+            console.error('Error al cargar programas:', error);
+            alert('Error al cargar programas');
+        }
+    };
 
     const abrirModal = (usuario = null) => {
         if (usuario) {

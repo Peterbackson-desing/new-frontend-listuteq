@@ -39,6 +39,28 @@ export default function Materias() {
                 console.error('Error al cargar programas:', error);
             }
         };
+        cargarMaterias();
+        cargarProgramas();
+    }, []);
+
+    const cargarMaterias = async () => {
+        try {
+            const response = await axios.get(`${API_URL}/all`);
+            setMaterias(response.data);
+        } catch (error) {
+            console.error('Error al cargar materias:', error);
+            alert('Error al cargar las materias');
+        }
+    };
+
+    const cargarProgramas = async () => {
+        try {
+            const response = await axios.get(PROGRAMAS_URL);
+            setProgramas(response.data);
+        } catch (error) {
+            console.error('Error al cargar programas:', error);
+        }
+    };
 
     const abrirModal = (materia = null) => {
         if (materia) {
@@ -103,6 +125,7 @@ export default function Materias() {
                 alert('Error al guardar la materia: ' + (error.response?.data?.message || error.message));
             }
         };
+    const guardarMateria = async (e) => { };
 
     const deshabilitarMateria = async (id) => {
     };
